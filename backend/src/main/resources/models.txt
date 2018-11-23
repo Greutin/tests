@@ -1,0 +1,100 @@
+roles
+    roleId
+    role
+    deleted
+
+users
+    userId
+    roleId
+    phoneNumber
+    password
+    firstName
+    lastName
+    otherName
+    deleted
+
+parents
+    parentId
+    userId
+    email null
+
+
+children
+    childId
+    userId
+    canUseOldQuestions
+
+childQuestions
+    childId
+    questionId
+
+childTests
+    testId
+    childId
+    themeId
+    complexity
+
+subjects
+    subjectId
+    subjectTitle
+    classNumber
+    deleted
+
+themes
+    themeId
+    themeTitle
+    subjectId
+    deleted
+
+questionType
+    questionTypeId
+    questionType
+    deleted
+
+questions
+    questionId
+    questionTitle
+    questionTypeId
+    themeId
+    deleted
+
+answers
+    answerId
+    answerText
+    correctAnswer
+    answer
+    questionId
+    deleted
+
+resolveTests
+    resolveTestId
+    themeId
+    userId
+    countGoodQuestions
+    countAllQuestions
+
+resolveAnswers
+    resolveAnswerId
+    resolveTestId
+    questionId
+    answerId
+    answerText - если ответ ввиде пользовательского текста
+
+
+{
+    "email" : "mail@mail.ru",
+    "user" : {
+        "username" : "username",
+        "password" : "Password1",
+        "phoneNumber" : "88005553535",
+        "firstName" : "Firstame",
+        "lastName" : "Lastame"
+    }
+}
+
+{
+    "username" : "username",
+    "password" : "Password1"
+}
+
+username=username&password=Password1

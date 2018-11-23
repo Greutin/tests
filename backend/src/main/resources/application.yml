@@ -1,0 +1,71 @@
+server:
+  port: 48080
+
+
+  #spring security okta
+  error:
+    whitelabel:
+      enabled: false
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          okta:
+            client-id: 0oagnxar8huo41JEu0h7
+            client-secret: 0oagnxar8huo41JEu0h7
+            scope: openid email profile
+        provider:
+          okta:
+            issuer-uri: https://dev-886193.oktapreview.com/oauth2/default #TODO необходио изменить
+
+  # create and drop tables and sequences, loads import.sql
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+  # Oracle settings
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tests
+    username: tests_admin
+    password: qwerty
+    initialization-mode: always
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  mvc:
+#    throw-exception-if-no-handler-found: true
+  resources:
+  data:
+    rest:
+      base-path: /api
+#    add-mappings: false
+#  profiles:
+#    active: @spring.profiles.active@
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+
+
+
+
+
+# ==============================================================
+# = Show or not log for each sql query
+# ==============================================================-sql = true
+
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+logging.level.org.hibernate.SQL: debug
+
+# ==============================================================
+# = Spring Security / Queries for AuthenticationManagerBuilder
+# ==============================================================
+spring.queries.users-query: select username, password, is_deleted from users where username=?
+spring.queries.roles-query: select u.username, r.role from users u inner join users_roles ur on(u.id=ur.user_id) inner join roles r on(ur.role_id=r.id) where u.username=?
+
+#stormpath.web.login.uri=/signin
+#stormpath.web.register.uri=/signup
+#stormpath.web.forgotPassword.uri=/lostpass
